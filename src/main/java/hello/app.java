@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication(scanBasePackages={
-        "hello.repository", "hello.entity"})
+        "hello.repository", "hello.entity","hello.controllers"})
 public class app implements CommandLineRunner{
     @Autowired
     private LinkRepo repository;
