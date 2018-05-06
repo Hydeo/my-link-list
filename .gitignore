@@ -4,7 +4,7 @@
 build/
 
 # Ignore Gradle GUI config
-gradle-app.setting
+gradle-hello.app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
@@ -131,7 +131,7 @@ buildNumber.properties
 # to generate your .gitignore file.
 
 # web application files
-/web-app/WEB-INF/classes
+/web-hello.app/WEB-INF/classes
 
 # default HSQL database files for production mode
 /prodDb.*
@@ -154,7 +154,7 @@ buildNumber.properties
 
 # older plugin install locations
 /plugins
-/web-app/plugins
+/web-hello.app/plugins
 
 # "temporary" build files
 /target
