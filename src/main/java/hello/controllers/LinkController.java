@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/{owner}")
 public class LinkController {
 
