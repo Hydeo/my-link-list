@@ -8,6 +8,7 @@ public class Link {
     public String id;
 
     public String owner;
+    public String listName;
     public String url;
     public String author;
     public String description;
@@ -17,8 +18,9 @@ public class Link {
 
     public Link(){}
 
-    public Link(String owner, String url, String author, String description, String image, String publisher, String title){
+    public Link(String owner,String listName, String url, String author, String description, String image, String publisher, String title){
         this.owner = owner;
+        this.listName = listName;
         this.url = url;
         this.author = author;
         this.description = description;
@@ -30,13 +32,17 @@ public class Link {
     @Override
     public  String toString(){
         return String.format(
-                "Link[id=%s,owner=%s, url=%s, author=%s, description=%s, image=%s, publisher=%s, title=%s]",
-                id,owner,url,author,description,image,publisher,title
+                "Link[id=%s,owner=%s,listName=%s, url=%s, author=%s, description=%s, image=%s, publisher=%s, title=%s]",
+                id,owner,listName,url,author,description,image,publisher,title
         );
     }
 
     public String getOwner() {
         return owner;
+    }
+
+    public String getListName() {
+        return listName;
     }
 
     public void setOwner(String owner) {

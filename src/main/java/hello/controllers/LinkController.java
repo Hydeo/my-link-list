@@ -35,6 +35,11 @@ public class LinkController {
         return repository.findAll();
     }
 
+    /*@RequestMapping(method = RequestMethod.GET, value = "/lists")
+    public List<String> getListOfOwner(@PathVariable String owner){
+        return repository.findListOfOwner(owner);
+    }*/
+
     @RequestMapping(method = RequestMethod.POST)
     public Link add(@PathVariable String owner, @RequestBody String json){
         JSONParser parser = new JSONParser();
