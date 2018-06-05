@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface LinkRepo extends MongoRepository<Link,String>{
+public interface LinkRepo extends MongoRepository<Link,String>, LinkRepoCustom{
      Link findByTitle(String title);
      List<Link> findByOwner(String owner);
      //List<Link> findByListName(String listName);

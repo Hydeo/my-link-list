@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,24 +36,25 @@ public class LinkController {
         return repository.findAll();
     }
 
-    /*@RequestMapping(method = RequestMethod.GET, value = "/lists")
+    @RequestMapping(method = RequestMethod.GET, value = "/lists")
     public List<String> getListOfOwner(@PathVariable String owner){
-        return repository.findListOfOwner(owner);
-    }*/
+         System.out.println("GETLIST");
+         return repository.getOwnerList(owner);
+    }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public Link add(@PathVariable String owner, @RequestBody String json){
+    @RequestMapping(method = RequestMethod.POST, value = "/{listName}")
+    public Link add(@PathVariable String owner,@PathVariable String listName, @RequestBody String json){
         JSONParser parser = new JSONParser();
         try {
             JSONObject parsed_json = (JSONObject) parser.parse(json);
-            return repository.save(fetchUrlInfo((String) parsed_json.get("url"),owner));
+            return repository.save(fetchUrlInfo((String) parsed_json.get("url"),owner,listName));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private Link fetchUrlInfo(String url,String owner){
+    private Link fetchUrlInfo(String url,String owner, String listName){
 
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString(graph_api_url)
@@ -60,6 +62,7 @@ public class LinkController {
         RestTemplate restTemplate = new RestTemplate();
         Link new_link= restTemplate.getForObject(builder.toUriString(), Link.class);
         new_link.owner = owner;
+        new_link.listName = listName;
         return new_link;
     }
 }
