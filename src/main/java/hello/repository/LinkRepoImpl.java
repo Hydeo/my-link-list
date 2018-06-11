@@ -19,7 +19,7 @@ public class LinkRepoImpl implements LinkRepoCustom {
     @Override
     public ArrayList<String> getOwnerList(String owner) {
         Criteria criteria = new Criteria();
-        criteria.where("owner").is("wxc");
+        criteria.where("owner").is(owner);
         Query query = new Query();
         query.addCriteria(criteria);
         MongoCollection mc = mongoTemplate.getCollection("link");

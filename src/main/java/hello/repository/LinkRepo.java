@@ -8,6 +8,7 @@ import java.util.List;
 public interface LinkRepo extends MongoRepository<Link,String>, LinkRepoCustom{
      Link findByTitle(String title);
      List<Link> findByOwner(String owner);
+     List<Link> findByListName(String listName);
      //List<Link> findByListName(String listName);
      //List<String> findListOfOwner(String owner);
 }

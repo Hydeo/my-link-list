@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/{owner}")
 public class LinkController {
 
     @Autowired
@@ -25,24 +24,29 @@ public class LinkController {
     @Value("${graph-api-url}")
     private String graph_api_url;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value="/{owner}")
     public List<Link> getOwnerList(@PathVariable String owner){
         System.out.println("Controler getlinklist called "+owner);
         return repository.findByOwner(owner);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/all")
+    @RequestMapping(method = RequestMethod.GET, value = "/lists/{listName}")
+    public List<Link> getLinkByListName(@PathVariable String listName){
+        return repository.findByListName(listName);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{owner}/all")
     public List<Link> getall(@PathVariable String owner){
         return repository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/lists")
+    @RequestMapping(method = RequestMethod.GET, value = "/{owner}/lists")
     public List<String> getListOfOwner(@PathVariable String owner){
          System.out.println("GETLIST");
          return repository.getOwnerList(owner);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/{listName}")
+    @RequestMapping(method = RequestMethod.POST, value = "/{owner}/{listName}")
     public Link add(@PathVariable String owner,@PathVariable String listName, @RequestBody String json){
         JSONParser parser = new JSONParser();
         try {
