@@ -46,6 +46,11 @@ public class LinkController {
          return repository.getOwnerList(owner);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value="/{idLink}")
+    public  void deleteLinkById(@PathVariable String idLink){
+        repository.deleteById(idLink);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/{owner}/{listName}")
     public Link add(@PathVariable String owner,@PathVariable String listName, @RequestBody String json){
         JSONParser parser = new JSONParser();

@@ -31,7 +31,7 @@ public class LinkRepoImpl implements LinkRepoCustom {
         BasicDBObject distinct_criteria = new BasicDBObject();
         distinct_criteria.append("owner",owner);
         DistinctIterable<String> c = mongoTemplate.getCollection("link").distinct("listName",distinct_criteria, String.class);
-        
+
         ArrayList<String> listNames = new ArrayList<>();
         c.forEach((Block<? super String>) listNames::add);
         for (String doc : c) {
