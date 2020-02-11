@@ -51,6 +51,19 @@ public class LinkController {
         repository.deleteById(idLink);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/vote/{idLink}")
+    public Link upvote(@RequestBody String json){
+        JSONParser parser = new JSONParser();
+        try {
+            JSONObject parsed_json = (JSONObject) parser.parse(json);
+            Link l = new Link(parsed_json);
+            return repository.save(l);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/{owner}/{listName}")
     public Link add(@PathVariable String owner,@PathVariable String listName, @RequestBody String json){
         JSONParser parser = new JSONParser();

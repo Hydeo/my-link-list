@@ -1,5 +1,6 @@
 package hello.entity;
 
+import org.json.simple.JSONObject;
 import org.springframework.data.annotation.Id;
 
 public class Link {
@@ -15,10 +16,11 @@ public class Link {
     public String image;
     public String publisher;
     public String title;
+    public Integer vote;
 
     public Link(){}
 
-    public Link(String owner,String listName, String url, String author, String description, String image, String publisher, String title){
+    public Link(String owner,String listName, String url, String author, String description, String image, String publisher, String title,Integer vote){
         this.owner = owner;
         this.listName = listName;
         this.url = url;
@@ -27,15 +29,39 @@ public class Link {
         this.image = image;
         this.publisher = publisher;
         this.title = title;
+        this.vote = vote;
     }
+
+    public Link(JSONObject parsed_json) {
+        this.id = (String)parsed_json.get("id");
+        this.owner = (String)parsed_json.get("owner");
+        this.listName = (String)parsed_json.get("listName");
+        this.url = (String)parsed_json.get("url");
+        this.author = (String)parsed_json.get("author");
+        this.description = (String)parsed_json.get("description");
+        this.image = (String)parsed_json.get("image");
+        this.publisher = (String)parsed_json.get("publisher");
+        this.title = (String)parsed_json.get("title");
+        this.vote = Math.toIntExact((Long) parsed_json.get("vote"));
+    }
+
 
     @Override
     public  String toString(){
         return String.format(
-                "Link[id=%s,owner=%s,listName=%s, url=%s, author=%s, description=%s, image=%s, publisher=%s, title=%s]",
-                id,owner,listName,url,author,description,image,publisher,title
+                "Link[id=%s,owner=%s,listName=%s, url=%s, author=%s, description=%s, image=%s, publisher=%s, title=%s, score=%s]",
+                id,owner,listName,url,author,description,image,publisher,title,vote
         );
     }
+
+    public Integer getVote() {
+        return vote;
+    }
+
+    public void setVote(Integer vote) {
+        this.vote = vote;
+    }
+
 
     public String getOwner() {
         return owner;
