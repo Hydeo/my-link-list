@@ -13,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -51,17 +52,16 @@ public class LinkController {
         repository.deleteById(idLink);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/vote/{idLink}")
-    public Link upvote(@RequestBody String json){
-        JSONParser parser = new JSONParser();
-        try {
-            JSONObject parsed_json = (JSONObject) parser.parse(json);
-            Link l = new Link(parsed_json);
-            return repository.save(l);
-        } catch (ParseException e) {
-            e.printStackTrace();
+    @RequestMapping(method = RequestMethod.POST, value = "/{idLink}")
+    public Link upvote(@PathVariable String idLink){
+        Link l = repository.findById(idLink).get();
+        if(l.vote == null){
+            l.vote = 1;
         }
-        return null;
+        else {
+            l.vote++;
+        }
+        return repository.save(l);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/{owner}/{listName}")
